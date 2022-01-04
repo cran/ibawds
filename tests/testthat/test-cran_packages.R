@@ -1,18 +1,39 @@
-test_that("test n_available_packages()", {
-  # don't test an actual call to MRAN because this failes on win-builder
-  # and (presumable) on CRAN
-  # expect_equal(n_available_packages("2020-01-01"), 15368)
-  expect_error(n_available_packages(10), "is not a valid date")
+test_that("test n_available_packages() with valid input", {
+  skip_on_cran()
+  skip_on_ci()
+  expect_equal(n_available_packages("2020-01-01"), 15368)
+  expect_gte(n_available_packages(Sys.Date()),
+             max(get_cran_history()$n_packages))
+})
+
+test_that("test available_r_version() with valid input", {
+  skip_on_cran()
+  skip_on_ci()
+  expect_equal(available_r_version("2020-01-01"), "3.6.2")
+  expect_true(available_r_version(Sys.Date()) >= max(get_cran_history()$version))
+})
+
+test_that("tests with invalid input", {
+  expect_error(available_r_version(10), "is not a valid date")
+  expect_error(n_available_packages("abc"), "is not a valid date")
   expect_error(n_available_packages("2013-07-02"),
                "MRAN has no data for dates before 2014-09-17")
-  expect_error(n_available_packages(Sys.Date() + 10),
+  expect_error(available_r_version(Sys.Date() + 10),
                "MRAN has no data for dates in the future.")
+  # setting these options causes file() to fail on URLs
+  opts <- options(url.method = "none", encoding = "none")
+  expect_error(n_available_packages(Sys.Date()),
+               "Obtaining data from MRAN failed")
+  options(opts)
+  expect_error(get_mran_page(Sys.Date(), ""), "invalid value for type")
 })
 
 test_that("test get_cran_history()", {
   expect_s3_class(get_cran_history(), "tbl_df")
-  expect_lte(nrow(get_cran_history()), 56)
-  expect_named(get_cran_history(), c("date", "n_packages"))
+  expect_gte(nrow(get_cran_history()), 57)
+  expect_named(get_cran_history(), c("date", "n_packages", "version", "source"))
   expect_s3_class(get_cran_history()$date, "Date")
   expect_type(get_cran_history()$n_packages, "integer")
+  expect_type(get_cran_history()$version, "character")
+  expect_type(get_cran_history()$source, "character")
 })

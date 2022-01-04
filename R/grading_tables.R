@@ -22,7 +22,7 @@
 #' `create_minreq_table()` creates a table that checks that the minimal requirements
 #' are satisfied:
 #' * the paper must be reproducible
-#' * there must be at least on table and two kinds of plots
+#' * there must be at least one table and two kinds of plots
 #' * there must be at least 5 plots and tables
 #' * there must be at least two statistical computations
 #'
@@ -50,6 +50,11 @@ create_minreq_table <- function(repro, n_tab, n_plot_kinds, n_plots, n_stat) {
   yes_no <- function(l) c("Nein", "Ja")[l + 1]
   nok_ok <- function(l) c("NOK", "OK")[l + 1]
 
+  # don't accept negative points
+  if (any(c(n_tab, n_plot_kinds, n_plots, n_stat) < 0)) {
+    stop("invalid input: positive numbers expected.")
+  }
+
   # vector of minimal requirements
   min_req <- c(1, 1, 2, 5, 2)
   # titles of the requirements
@@ -63,9 +68,12 @@ create_minreq_table <- function(repro, n_tab, n_plot_kinds, n_plots, n_stat) {
     res = c(repro, n_tab, n_plot_kinds, n_tab + n_plots, n_stat),
     Beurteilung = c(nok_ok(.data$res[1]),
                     paste(.data$res[-1], req_titles[-1])),
-    "Erf\u00fcllt" = yes_no(.data$res >= min_req)
+    # setting the name with umlaut here leadds to a CRAN warning on Windows
+    # => use no umlaut here, rename below
+    Erfullt = yes_no(.data$res >= min_req)
   ) %>%
   dplyr::select(-"res") %>%
+  magrittr::set_names(c("Anforderung", "Beurteilung", "Erf\u00fcllt")) %>%
   kableExtra::kable(format = "html") %>%
   kableExtra::kable_styling()
 }

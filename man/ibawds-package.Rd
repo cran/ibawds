@@ -6,13 +6,13 @@
 \alias{ibawds-package}
 \title{Functionality for Data Science at IBAW}
 \description{
-A collection of useful functions and datasets for the Data Science
-  Course at IBAW in Lucerne.
+A collection of useful functions and datasets for the Data Science Course at IBAW in Lucerne.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/stibu81/ibawds}
+  \item \url{https://stibu81.github.io/ibawds/}
+  \item Report bugs at \url{https://github.com/stibu81/ibawds/issues}
 }
 
 }
