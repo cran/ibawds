@@ -18,7 +18,7 @@
 "mtcars2"
 
 #' @rdname mtcars2
-#' @format
+#' @format NULL
 
 "mtcars2_na"
 
@@ -81,7 +81,7 @@
 "galton_sons"
 
 #' @rdname galton_sons
-#' @format
+#' @format NULL
 
 "galton_daughters"
 
@@ -198,6 +198,66 @@
 #' @keywords datasets
 
 "wine_quality"
+
+
+#' Wisconsin Breast Cancer Database
+#'
+#' Breast cancer database obtained from the University of Wisconsin
+#' Hospitals, Madison from Dr. William H. Wolberg. The data were collected
+#' in 8 from 1989 to 1991 and are sorted in chronological order.
+#'
+#' @format a tibble with 699 rows and 11 variables. All numerical values are
+#'  integers in the range 1 to 10.
+#' \describe{
+#'   \item{id}{sample code number}
+#'   \item{clump_thick}{clump thickness}
+#'   \item{unif_cell_size}{uniformity of cell size}
+#'   \item{unif_cell_shape}{uniformity of cell shape}
+#'   \item{marg_adh}{marginal adhesion}
+#'   \item{ep_cell_size}{single epithelial cell size}
+#'   \item{bare_nucl}{bare nuclei}
+#'   \item{bland_chromat}{bland chromatin}
+#'   \item{norm_nucl}{normal nucleoli}
+#'   \item{mitoses}{mitoses}
+#'   \item{class}{"benign" (458) or "malignant" (241)}
+#' }
+#'
+#' @source
+#' The data is available on the
+#' [UC Irvine Machine Learning Repository](https://archive-beta.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+original).
+#'
+#' O. L. Mangasarian and W. H. Wolberg, *Cancer diagnosis via linear programming*,
+#' SIAM News, Volume 23(5) (1990) 1 & 18.
+#'
+#' @keywords datasets
+
+"breast_cancer"
+
+
+#' Noisy Data From a Tenth Order Polygon
+#'
+#' Training and test data create from a tenth order polynomial with added noise.
+#' The polynomial is given by
+#' \deqn{f(x) = 2 x - 10 x^5 + 15 x^{10}}{f(x) = 2 x - 10 x^5 + 15 x^10}
+#' The noise follows a standard normal distribution. The data can be used to
+#' demonstrate overfitting. It is inspired by section II. B. in
+#' [A high-bias, low-variance introduction to Machine Learning for physicists](https://arxiv.org/abs/1803.08823)
+#'
+#' @format a list of two tibbles with two columns each. \eqn{x} stands for the
+#'  independent, \eqn{y} for the dependent variable. The training data
+#'  (`noisy_data$train`) contains 1000 rows, the test data (`noisy_data$test`)
+#'  20 rows.
+#'
+#' @references
+#' P. Mehta et al.,
+#' *A high-bias, low-variance introduction to Machine Learning for physicists*
+#' Phys. Rep. 810 (2019), 1-124.
+#' [arXiv:1803.08823](https://arxiv.org/abs/1803.08823)
+#' \doi{10.1016/j.physrep.2019.03.001}
+#'
+#' @keywords datasets
+
+"noisy_data"
 
 
 #' History of the Number of Available CRAN Packages
