@@ -98,17 +98,17 @@ voronoi_diagram <- function(cluster, x, y, data = NULL,
       dplyr::as_tibble(tile[c("x", "y")])
     }) %>%
     dplyr::bind_rows(.id = ".cluster") %>%
-    dplyr::rename(!!x := .data$x, !!y := .data$y) %>%
+    dplyr::rename(!!x := "x", !!y := "y") %>%
     dplyr::mutate(.cluster = stringr::str_remove(.data$.cluster, "^pt."))
 
   # create the Voronoi diagram without data points
   plot <- centers %>%
-    ggplot2::ggplot(ggplot2::aes_string(x, y,
-                                        fill = ".cluster",
-                                        colour = ".cluster")) +
+    ggplot2::ggplot(ggplot2::aes(.data[[x]], .data[[y]],
+                                 fill = .data$.cluster,
+                                 colour = .data$.cluster)) +
     ggplot2::geom_polygon(data = polys,
                           colour = "black", alpha = 0.8,
-                          lwd = linewidth) +
+                          linewidth = linewidth) +
     ggplot2::geom_point(shape = 18, size = 3 * point_size) +
     ggplot2::scale_fill_brewer(palette = "Pastel1", guide = "none") +
     ggplot2::scale_colour_brewer(palette = "Set1",
@@ -211,7 +211,7 @@ cluster_with_centers <- function(data, centers) {
 
   centers <- clustered %>%
     dplyr::group_by(.data$cluster) %>%
-    dplyr::summarise(dplyr::across(.fns = mean)) %>%
+    dplyr::summarise(dplyr::across(.cols = dplyr::everything(), .fns = mean)) %>%
     dplyr::select(-"cluster")
 
   list(centers = centers, cluster = clustered$cluster)
@@ -234,8 +234,9 @@ init_rand_centers <- function(data, n, seed = sample(1000:9999, 1)) {
 
   set.seed(seed)
 
-  centers <- data %>% dplyr::summarise(
+  centers <- data %>% dplyr::reframe(
     dplyr::across(
+      .cols = dplyr::everything(),
       .fns = function(x) stats::runif(n, min(x), max(x))
     )
   )
