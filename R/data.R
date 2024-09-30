@@ -234,9 +234,9 @@
 "breast_cancer"
 
 
-#' Noisy Data From a Tenth Order Polygon
+#' Noisy Data From a Tenth Order Polynomial
 #'
-#' Training and test data create from a tenth order polynomial with added noise.
+#' Training and test data created from a tenth order polynomial with added noise.
 #' The polynomial is given by
 #' \deqn{f(x) = 2 x - 10 x^5 + 15 x^{10}}{f(x) = 2 x - 10 x^5 + 15 x^10}
 #' The noise follows a standard normal distribution. The data can be used to
@@ -325,7 +325,7 @@
 get_reading_exercise_files <- function(path, unzip = TRUE) {
 
   if (!dir.exists(path)) {
-    stop("Directory ", path, " does not exist.")
+    cli::cli_abort(paste0("Directory \"", path, "\" does not exist."))
   }
 
   zipfile <- system.file("extdata", "files.zip", package = "ibawds")
