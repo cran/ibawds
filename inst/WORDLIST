@@ -1,5 +1,6 @@
 Agrarpolitik
 Beifahrer
+Beurteilung
 CMD
 Cerdeira
 Codecov
@@ -10,7 +11,6 @@ Hartigan
 Heatmaps
 IBAW
 Institut
-Lifecycle
 MRAN
 Mangasarian
 Marktlehre
@@ -22,6 +22,7 @@ RMarkdown
 RStudio
 Redhat
 Reis
+Rmd
 Rücksitz
 Spannungsfeld
 UC
@@ -30,6 +31,7 @@ Voronoi
 Wolberg
 XQuartz
 arXiv
+etc
 für
 ggplot
 ggvoronoi
@@ -37,6 +39,7 @@ im
 internationalen
 knitr
 mtcars
+nospellcheck
 physicochemical
 tibble
 tibbles

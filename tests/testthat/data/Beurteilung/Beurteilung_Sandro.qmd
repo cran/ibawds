@@ -1,0 +1,21 @@
+---
+title: "Rückmeldung Transferarbeit Sandro"
+author: "Stefan Lanz"
+date: "2025-02-10"
+format: html
+---
+
+Testdatei für die Beurteilung.
+
+Die Namen aller Studierenden sind keine Schreibfehler: Reto, Sandro
+
+Diese Wörter sind in der Wordlist:
+
+* Regressionsmodell
+* Whisker
+* SE
+* csv-Datei
+* Confounder
+* tibble
+
+Das ist ein Schreibfehlr!
